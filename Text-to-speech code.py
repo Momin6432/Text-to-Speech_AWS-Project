@@ -5,18 +5,18 @@ import sys
 from tempfile import gettempdir
 from contextlib import closing
 
-# Initialize Tkinter root window
+# Initializing Tkinter root window
 root = tk.Tk()
-root.geometry("400x240")  # Corrected geometry setting
+root.geometry("400x240")  
 root.title("T2S-Con Amazon Polly")
 
-# Create a Text widget
+# Creating a Text widget
 textexample = tk.Text(root, height=10)
 textexample.pack()
 
 def get_text():
     try:
-        aws_mag_con = boto3.session.Session(profile_name='Sdk_user')
+        aws_mag_con = boto3.session.Session(profile_name='type your IAM user here')
         client = aws_mag_con.client(service_name='polly', region_name='us-east-1')
         
         # Get text from the Text widget
@@ -27,7 +27,7 @@ def get_text():
 
         print(result)
         
-        # Call Polly to synthesize speech
+        # Calling Polly to synthesize speech
         response = client.synthesize_speech(VoiceId='Joanna', SampleRate='8000', OutputFormat='mp3', Text=result, Engine='neural')
         
         print(response)
